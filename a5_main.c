@@ -53,7 +53,7 @@ struct tnode* add(struct tnode* node, int xVal, int yVal) {
         return node; //no duplicates
     }
 
-    node->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));;
+    node->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
     node = balance(node);
     return node;
 }
@@ -154,7 +154,7 @@ void readFile (struct BinaryTree* tree, char* pointFile){
     fclose(fptr);
 }
 
-int main (){
+int main (int argc, char* argv[]){
     int total = 0;
     int inx;
     int iny;
@@ -162,7 +162,7 @@ int main (){
 
     struct BinaryTree tree;
     tree.head = NULL;
-    readFile(&tree,"points.txt");
+    readFile(&tree,argv[1]);
 
      while(scanf("%d %d %d",&inx, &iny, &area)==3){
             Preorder(tree.head, &total, inx, iny, area);
