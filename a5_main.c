@@ -21,6 +21,7 @@ return node->height;
 struct tnode* balance(struct tnode* node);
 int collision_detect(int xPoint, int yPoint, int xTest, int yTest, int area);
 
+
 struct BinaryTree{
     struct tnode* head;
 };
@@ -49,7 +50,7 @@ struct tnode* add(struct tnode* node, int xVal, int yVal) {
         return node; //no duplicates
     }
 
-    node->height = 0;
+    node->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));;
     node = balance(node);
     return node;
 }
@@ -85,6 +86,8 @@ struct tnode* rotate_r(struct tnode* current)
 struct tnode* new = current->left;
 current->left = new->right;
 new->right = current;
+current->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
+new->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
 return new;
 }
 
@@ -93,6 +96,8 @@ struct tnode* rotate_l(struct tnode* current)
 struct tnode* new = current->right;
 current->right = new->left;
 new->left = current;
+current->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
+new->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
 return new;
 }
 
@@ -137,6 +142,8 @@ void readFile (struct BinaryTree* tree, char* pointFile){
     while(fscanf(fptr, "%d %d", &xcoord, &ycoord) == 2){
         tree->head = add(tree->head, xcoord, ycoord);
     }
+
+    fclose(fptr);
 }
 
 int main (){
@@ -171,3 +178,4 @@ int collision_detect(int xPoint,int yPoint,int xTest,int yTest,int area){
         return 0;
     }
 }
+
