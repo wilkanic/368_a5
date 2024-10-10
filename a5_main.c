@@ -29,6 +29,9 @@ struct BinaryTree{
 struct tnode* add(struct tnode* node, int xVal, int yVal) {
     if(node == NULL) {
         node = (struct tnode*)malloc(sizeof(struct tnode));
+        if (!node) {
+          return NULL;
+        }   
         node->x = xVal;
         node->y = yVal;
         node->left = NULL;
@@ -56,11 +59,16 @@ struct tnode* add(struct tnode* node, int xVal, int yVal) {
 }
 
 void delete(struct tnode* node) {
-if(node != NULL) {
-delete(node->left);
-delete(node->right);
-free(node);
-}
+if (node == NULL) {
+        return;
+    }
+
+    // Free left and right subtrees
+    delete(node->left);
+    delete(node->right);
+
+    // Free current node
+    free(node);
 }
 
 void Preorder(struct tnode* node, int* total, int xPoint, int yPoint, int area)
@@ -178,4 +186,3 @@ int collision_detect(int xPoint,int yPoint,int xTest,int yTest,int area){
         return 0;
     }
 }
-
