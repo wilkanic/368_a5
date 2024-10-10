@@ -86,8 +86,8 @@ struct tnode* rotate_r(struct tnode* current)
 struct tnode* new = current->left;
 current->left = new->right;
 new->right = current;
-current->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
-new->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
+current->height = 1 + (height(current->left) > height(current->right) ? height(current->left) : height(current->right));
+new->height = 1 + (height(new->left) > height(new->right) ? height(new->left) : height(new->right));
 return new;
 }
 
@@ -96,8 +96,8 @@ struct tnode* rotate_l(struct tnode* current)
 struct tnode* new = current->right;
 current->right = new->left;
 new->left = current;
-current->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
-new->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
+current->height = 1 + (height(current->left) > height(current->right) ? height(current->left) : height(current->right));
+new->height = 1 + (height(new->left) > height(new->right) ? height(new->left) : height(new->right));
 return new;
 }
 
